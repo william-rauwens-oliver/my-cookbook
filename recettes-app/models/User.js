@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema({
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
 });
 
-// Hachage du mot de passe avant sauvegarde
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
